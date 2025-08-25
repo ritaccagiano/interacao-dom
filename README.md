@@ -31,4 +31,4 @@ Clone o repositório e abra o arquivo `index.html` no navegador:
 git clone git@github.com:ritaccagiano/interacao-dom.git
 cd interacao-dom
 
-Feito com amor por Rita Cagiano.
+Feito com amor por Rita Cagiano

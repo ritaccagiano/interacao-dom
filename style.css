@@ -1,0 +1,48 @@
+body {
+  font-family: "Roboto", Arial, sans-serif;
+  padding: 20px;
+  background-color: #fff;
+  color: #222;
+  line-height: 1.6;
+}
+
+#mensagem {
+  color: black;
+  margin-bottom: 20px;
+}
+
+/* estilo base para todos os botões */
+button, .botao-acesso {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #455da0;
+  color: white;
+  text-decoration: none;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+  font-size: 15px;
+}
+
+/* hover com destaque */
+button:hover, .botao-acesso:hover {
+  background-color: #3a4c85;
+  transform: scale(1.05); /* leve zoom no hover */
+}
+
+/* container dos botões de interação */
+.container-botoes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* alinhados à esquerda */
+  gap: 15px;
+  margin-top: 30px;
+}
+
+/* botão de acesso, mas alinhado à esquerda também */
+.botao-acesso-wrapper {
+  margin-top: 40px; 
+  text-align: left; /* agora alinhado com os outros */
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interações com DOM</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <h2>Olá, Visitante!</h2>
+      <p id="mensagem">Clique em um botão para interagir.</p>
+
+      <section class="container-botoes">
+        <button type="button" onclick="mudarTexto()">Mudar texto</button>
+        <button type="button" onclick="mudarCor()">Mudar cor</button>
+        <button type="button" onclick="adicionarMensagem()">Adicionar nova mensagem</button>
+      </section>
+
+      <section class="botao-acesso-wrapper">
+        <a href="https://ritaccagiano.github.io/interacao-dom/" target="_blank" rel="noopener noreferrer">
+          <button type="button" class="botao-acesso">Acesse o projeto</button>
+        </a>
+      </section>
+
+      <section id="novasMensagens"></section>
+    </main>
+
+    <script>
+      function mudarTexto() {
+        document.getElementById('mensagem').innerText = 'Texto alterado com sucesso!';
+      }
+
+      function mudarCor() {
+        document.getElementById('mensagem').style.color = 'blue';
+      }
+
+      function adicionarMensagem() {
+        const nova = document.createElement('p');
+        nova.innerText = 'Essa é uma nova mensagem adicionada!';
+        document.getElementById('novasMensagens').appendChild(nova);
+      }
+    </script>
+
+    <script>
+  function adicionarMensagem() {
+    // Abre um prompt para o usuário digitar
+    let novaMensagem = prompt("Digite sua nova mensagem:");
+
+    // Se a pessoa digitou algo (não cancelou o prompt)
+    if (novaMensagem && novaMensagem.trim() !== "") {
+      // Cria um novo elemento <p>
+      let p = document.createElement("p");
+      p.textContent = novaMensagem;
+
+      // Adiciona a mensagem dentro de uma div/container
+      document.body.appendChild(p);
+    }
+  }
+</script>
+  </body>
+</html>

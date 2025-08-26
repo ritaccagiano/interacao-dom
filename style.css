@@ -9,6 +9,7 @@ body {
 #mensagem {
   color: black;
   margin-bottom: 20px;
+  transition: color 0.3s ease; /* animação suave ao mudar a cor */
 }
 
 /* estilo base para todos os botões */

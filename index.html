@@ -1,62 +1,119 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Interações com DOM</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <main>
-      <h2>Olá, Visitante!</h2>
-      <p id="mensagem">Clique em um botão para interagir.</p>
-
-      <section class="container-botoes">
-        <button type="button" onclick="mudarTexto()">Mudar texto</button>
-        <button type="button" onclick="mudarCor()">Mudar cor</button>
-        <button type="button" onclick="adicionarMensagem()">Adicionar nova mensagem</button>
-      </section>
-
-      <section class="botao-acesso-wrapper">
-        <a href="https://ritaccagiano.github.io/interacao-dom/" target="_blank" rel="noopener noreferrer">
-          <button type="button" class="botao-acesso">Acesse o projeto</button>
-        </a>
-      </section>
-
-      <section id="novasMensagens"></section>
-    </main>
-
-    <script>
-      function mudarTexto() {
-        document.getElementById('mensagem').innerText = 'Texto alterado com sucesso!';
-      }
-
-      function mudarCor() {
-        document.getElementById('mensagem').style.color = 'blue';
-      }
-
-      function adicionarMensagem() {
-        const nova = document.createElement('p');
-        nova.innerText = 'Essa é uma nova mensagem adicionada!';
-        document.getElementById('novasMensagens').appendChild(nova);
-      }
-    </script>
-
-    <script>
-  function adicionarMensagem() {
-    // Abre um prompt para o usuário digitar
-    let novaMensagem = prompt("Digite sua nova mensagem:");
-
-    // Se a pessoa digitou algo (não cancelou o prompt)
-    if (novaMensagem && novaMensagem.trim() !== "") {
-      // Cria um novo elemento <p>
-      let p = document.createElement("p");
-      p.textContent = novaMensagem;
-
-      // Adiciona a mensagem dentro de uma div/container
-      document.body.appendChild(p);
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interações com DOM</title>
+  <link rel="stylesheet" href="style.css" />
+   <style>
+    /* pequenas garantias para o botão (mova para style.css se quiser) */
+    .botao-acesso {
+      display: inline-block;
+      pointer-events: auto; /* garante que seja clicável */
     }
-  }
-</script>
-  </body>
+    .botao-acesso-wrapper {
+      position: relative;
+      z-index: 10; /* evita ficar sob outros elementos */
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h2>Olá, Visitante!</h2>
+    <p id="mensagem">Clique em um botão para interagir.</p>
+
+    <section class="container-botoes">
+      <button type="button" onclick="mudarTexto()">Mudar texto</button>
+      <button type="button" onclick="abrirSeletorCor()">Mudar cor</button>
+      <button type="button" onclick="adicionarMensagem()">Adicionar nova mensagem</button>
+    </section>
+
+    <!-- Botão de acesso estilizado -->
+    <section class="botao-acesso-wrapper">
+      <a class="botao-acesso"
+         href="https://ritaccagiano.github.io/interacao-dom/"
+         target="_blank" rel="noopener noreferrer">
+        Acesse o projeto
+      </a>
+    </section>
+
+    <section id="novasMensagens"></section>
+  </main>
+
+  <script>
+    function mudarTexto() {
+      document.getElementById('mensagem').innerText = 'Texto alterado com sucesso!';
+    }
+
+    function abrirSeletorCor() {
+      const inputCor = document.createElement('input');
+      inputCor.type = 'color';
+      inputCor.style.position = 'absolute';
+      inputCor.style.left = '-9999px';
+      document.body.appendChild(inputCor);
+
+      inputCor.addEventListener('input', function() {
+        const corEscolhida = inputCor.value;
+        document.getElementById('mensagem').style.color = corEscolhida;
+
+        // Ajusta fundo se a cor for muito clara
+        const rgb = parseInt(corEscolhida.slice(1), 16);
+        const r = (rgb >> 16) & 0xff;
+        const g = (rgb >> 8) & 0xff;
+        const b = rgb & 0xff;
+        const brilho = (r*299 + g*587 + b*114) / 1000;
+
+        if (brilho > 200) {
+          document.body.style.backgroundColor = "#222"; // fundo escuro
+        } else {
+          document.body.style.backgroundColor = "#fff"; // fundo claro
+        }
+      });
+
+      inputCor.addEventListener('change', function() {
+        document.body.removeChild(inputCor);
+      });
+
+      inputCor.click();
+    }
+
+    function adicionarMensagem() {
+      let novaMensagem = prompt("Digite sua nova mensagem:");
+      if (novaMensagem && novaMensagem.trim() !== "") {
+        const p = document.createElement("p");
+        p.textContent = novaMensagem;
+        document.getElementById('novasMensagens').appendChild(p);
+      }
+    }
+
+     /* ---------- robustez e debug para o link do projeto ---------- */
+    document.addEventListener('DOMContentLoaded', () => {
+      const link = document.querySelector('.botao-acesso');
+      if (!link) return;
+
+      // Handler “mais forte” que abre em nova aba; se bloqueado, navega na mesma aba.
+      link.addEventListener('click', (e) => {
+        // evita que scripts/pais capturem ou alterem o comportamento
+        e.preventDefault();
+        e.stopPropagation();
+
+        // marcador no console para debug
+        console.log('Clique detectado no link do projeto:', link.href);
+
+        // tenta abrir nova aba (funciona quando é um clique do usuário)
+        const win = window.open(link.href, '_blank', 'noopener,noreferrer');
+
+        // se o popup foi bloqueado (win === null), navega na mesma aba
+        if (!win) {
+          console.warn('Popup bloqueado — navegando na mesma aba como fallback.');
+          location.href = link.href;
+        }
+      });
+
+      // Opcional: destaque temporário para verificar se o link está visível/alcance
+      // Remova em produção.
+      // document.querySelector('.botao-acesso-wrapper').style.outline = '2px dashed red';
+    });
+  </script>
+</body>
 </html>

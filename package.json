@@ -1,0 +1,23 @@
+{
+  "name": "testejs_html",
+  "version": "1.0.0",
+  "description": "Este projeto demonstra como utilizar JavaScript para manipular elementos HTML dinamicamente. Através de funções simples, o usuário pode alterar textos, modificar estilos e adicionar novos conteúdos à página — tudo isso com interações diretas via botões.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ritaccagiano/interacao-dom.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ritaccagiano/interacao-dom/issues"
+  },
+  "homepage": "https://github.com/ritaccagiano/interacao-dom#readme",
+  "devDependencies": {
+    "jest": "^30.0.5"
+  }
+}

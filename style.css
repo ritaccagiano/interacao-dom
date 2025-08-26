@@ -1,3 +1,4 @@
+/* Reset básico e tipografia */
 body {
   font-family: "Roboto", Arial, sans-serif;
   padding: 20px;
@@ -6,18 +7,19 @@ body {
   line-height: 1.6;
 }
 
+/* Mensagem principal */
 #mensagem {
-  color: black;
   margin-bottom: 20px;
-  transition: color 0.3s ease; /* animação suave ao mudar a cor */
+  transition: color 0.3s ease;
 }
 
-/* estilo base para todos os botões */
-button, .botao-acesso {
+/* Todos os botões e links com .botao-acesso */
+button,
+.botao-acesso {
   display: inline-block;
   padding: 12px 24px;
   background-color: #455da0;
-  color: white;
+  color: #fff;
   text-decoration: none;
   border: none;
   border-radius: 8px;
@@ -27,23 +29,39 @@ button, .botao-acesso {
   font-size: 15px;
 }
 
-/* hover com destaque */
-button:hover, .botao-acesso:hover {
+/* Hover */
+button:hover,
+.botao-acesso:hover {
   background-color: #3a4c85;
-  transform: scale(1.05); /* leve zoom no hover */
+  transform: scale(1.05);
 }
 
-/* container dos botões de interação */
+/* Container dos botões de interação */
 .container-botoes {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start; /* alinhados à esquerda */
   gap: 15px;
   margin-top: 30px;
 }
 
-/* botão de acesso, mas alinhado à esquerda também */
+/* Wrapper do link de acesso */
 .botao-acesso-wrapper {
-  margin-top: 40px; 
-  text-align: left; /* agora alinhado com os outros */
+  margin-top: 40px;
+  text-align: left;
+}
+
+/* Responsividade para telas pequenas */
+@media (max-width: 600px) {
+  .container-botoes,
+  .botao-acesso-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  button,
+  .botao-acesso {
+    width: 100%;
+    text-align: center;
+  }
 }

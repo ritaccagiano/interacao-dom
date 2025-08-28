@@ -13,6 +13,30 @@ body {
   transition: color 0.3s ease;
 }
 
+/* Adicionando estilos para o campo de input */
+input[type="text"] {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  padding: 12px 16px;
+  margin-bottom: 15px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: "Roboto", Arial, sans-serif;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #455da0;
+  box-shadow: 0 0 0 3px rgba(69, 93, 160, 0.1);
+}
+
+input[type="text"]::placeholder {
+  color: #999;
+}
+
 /* Todos os botões e links com .botao-acesso */
 button,
 .botao-acesso {
@@ -63,5 +87,10 @@ button:hover,
   .botao-acesso {
     width: 100%;
     text-align: center;
+  }
+
+  /* Ajustando input para mobile */
+  input[type="text"] {
+    max-width: 100%;
   }
 }

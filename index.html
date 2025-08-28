@@ -15,6 +15,16 @@
 
     <p id="mensagem">Clique em um botão para interagir.</p>
 
+    <!-- Adicionado campo de input para texto personalizado -->
+    <section class="input-wrapper">
+      <input 
+        type="text" 
+        id="inputTexto" 
+        placeholder="Digite o novo texto..." 
+        style="padding: 8px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; width: 250px;"
+      />
+    </section>
+
     <section class="container-botoes">
       <button type="button" onclick="mudarTexto()">
         Mudar texto
@@ -27,11 +37,11 @@
       </button>
     </section>
 
-    <!-- Link estilizado como botão -->
+    <!-- Corrigido link do botão para apontar para o repositório GitHub -->
     <section class="botao-acesso-wrapper">
       <a
         class="botao-acesso"
-        href="https://ritaccagiano.github.io/interacao-dom/"
+        href="https://github.com/ritaccagiano/interacao-dom"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -44,8 +54,12 @@
 
   <script>
     function mudarTexto() {
-      document.getElementById('mensagem').innerText =
-        'Texto alterado com sucesso!';
+      const inputTexto = document.getElementById('inputTexto');
+      const mensagem = document.getElementById('mensagem');
+      const novoTexto = inputTexto.value.trim() || 'Texto alterado com sucesso!';
+      
+      mensagem.innerText = novoTexto;
+      inputTexto.value = ''; // Limpa o campo após usar
     }
 
     function abrirSeletorCor() {
